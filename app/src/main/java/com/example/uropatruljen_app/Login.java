@@ -46,7 +46,6 @@ public class Login extends AppCompatActivity {
         String receivedToShareSSID = receivedKeys.getStringExtra("ssid_key");
         String receivedToSharePass = receivedKeys.getStringExtra("pass_key");
 
-        // Creating and starting thread
         Thread = new Thread(new SocketThread());
         Thread.start();
 
@@ -63,33 +62,14 @@ public class Login extends AppCompatActivity {
             }
             else {
 
-                // Creating thread within a passed parameter
-                Thread = new Thread(new SendToSocketThread(receivedToShareSSID));
-                Thread.start();
-
-                // Creating thread within a passed parameter
-                Thread = new Thread(new SendToSocketThread(receivedToSharePass));
-                Thread.start();
-
+                // Creating and starting thread
                 try {
-
-                    // Creating thread within a passed and hashing parameter
-                    Thread = new Thread(new SendToSocketThread(toHexString(getSHA(modelNum))));
-                    Toast.makeText(getBaseContext(),  modelNum + " til SHA256: " + toHexString(getSHA(modelNum)), Toast.LENGTH_SHORT).show();
-
-                } catch (NoSuchAlgorithmException e) {
+                    Thread = new Thread(new SendToSocketThread(receivedToShareSSID, receivedToSharePass,(toHexString(getSHA(modelNum)))));
+                }
+                catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
                 Thread.start();
-
-                try {
-
-                    // closing the connection
-                    socket.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
@@ -119,13 +99,19 @@ public class Login extends AppCompatActivity {
         }
     }
 
+
     // Create SendToSocketThread class for sending info to server
     class SendToSocketThread implements Runnable {
 
-        private final String sendTo;
-        SendToSocketThread(String sendTo) {
+        private final String sendSSID;
+        private final String sendPASS;
+        private final String sendModelNum;
 
-            this.sendTo = sendTo;
+        SendToSocketThread(String sendSSID, String sendPASS, String sendModelNum) {
+
+            this.sendSSID = sendSSID;
+            this.sendPASS = sendPASS;
+            this.sendModelNum = sendModelNum;
         }
 
         @Override
@@ -136,25 +122,39 @@ public class Login extends AppCompatActivity {
                 // Using OutputStreamWriter and BufferedWriter to send streamed output to socket
                 OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream());
                 BufferedWriter writeNum = new BufferedWriter(out);
-                writeNum.write(sendTo);
+                writeNum.write("////");
+                writeNum.write(sendSSID);
+                writeNum.write("////");
+                writeNum.write(sendPASS);
+                writeNum.write("////");
+                writeNum.write(sendModelNum);
                 writeNum.flush();
 
                 // Using expression lambda to display Toast message in a thread
                 Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(), "Sender til uro..... ", Toast.LENGTH_SHORT).show());
 
-                new Thread(new ReceiveFromSocketThread()).start();
+                new Thread(new ReceiveFromSocketThread(sendSSID, sendPASS)).start();
             }
             catch (Exception e) {
                 e.printStackTrace();
 
                 // Using expression lambda to display Toast message in a thread
-                Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(), "Noget gik galt,\n Prøv at indtaste\n modelnr igen", Toast.LENGTH_SHORT).show());
+                Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(), "Noget gik galt....", Toast.LENGTH_SHORT).show());
             }
         }
     }
 
     // Create ReceiveFromSocketThread class for receiving info from server
     class ReceiveFromSocketThread implements Runnable {
+
+        private final String getSSID;
+        private final String getPASS;
+
+        ReceiveFromSocketThread(String getSSID, String getPASS) {
+
+            this.getSSID = getSSID;
+            this.getPASS = getPASS;
+        }
 
         @Override
         public void run() {
@@ -166,23 +166,31 @@ public class Login extends AppCompatActivity {
                 byte[] recievedToken = new byte[1024];
                 int data = stream.read(recievedToken);
 
+                socket.close();
+
                     // Converting bytes to string
                     String token = new String(recievedToken, StandardCharsets.UTF_8);
 
-                    if (data == 0) {
+                    // Using expression lambda to display Toast message in a thread
+                    Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(),"Besked fra uro: " + token, Toast.LENGTH_SHORT).show());
 
-                        // Using expression lambda to display Toast message in a thread
-                        Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(), "Ingen besked fra uro", Toast.LENGTH_SHORT).show());
+                   /* if (data > 0) {
+                        // Intent function to move to another activity
+                        Intent goToHotspot = new Intent(getApplicationContext(), Hotspot.class);
 
-                    }
-                    else {
+                        // Using .putExtra for sending values to another activity
+                        goToHotspot.putExtra("ssid_key", getSSID);
+                        goToHotspot.putExtra("pass_key", getPASS);
+                        startActivity(goToHotspot);
+                        finish();
+                    } */
 
-                        // Using expression lambda to display Toast message in a thread
-                        Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(),"Besked fra uro: " + token, Toast.LENGTH_SHORT).show());
-
-                    }
             } catch (Exception e) {
                 e.printStackTrace();
+
+                // Using expression lambda to display Toast message in a thread
+                Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(), "Ingen besked fra uro", Toast.LENGTH_SHORT).show());
+
             }
         }
     }

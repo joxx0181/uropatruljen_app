@@ -62,12 +62,7 @@ public class Hotspot extends ListActivity {
         wifiReceiver = new WifiScanReceiver();
         wifiOBJ.startScan();
 
-        // Reset wifi with Disable and Enable wifi
-        wifiOBJ.setWifiEnabled(false);
-        wifiOBJ.setWifiEnabled(true);
-
         if(!currentSSID.contains("prog")) {
-
 
                 finallyConnect(hoturoPASS, hoturoSSID);
 
@@ -94,16 +89,17 @@ public class Hotspot extends ListActivity {
             String personalSSID = receivedKeys.getStringExtra("ssid_key");
             String personalPASS = receivedKeys.getStringExtra("pass_key");
 
-            do {
-
-                finallyConnect(personalPASS, personalSSID);
-
-            } while (!currentSSID.contains(personalSSID));
+            finallyConnect(personalPASS, personalSSID);
 
             if (currentSSID.contains(personalSSID)) {
 
                 Intent goToOption = new Intent(Hotspot.this, OptionPage.class);
                 startActivity(goToOption);
+            }
+            else {
+
+                Intent goToStart = new Intent(Hotspot.this, MainActivity.class);
+                startActivity(goToStart);
             }
 
         }

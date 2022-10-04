@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">uropatruljen_app</string>
+    <string name="connect">Tilslut wifi</string>
+    <string name="login">Login</string>
+    <string name="indtast_modelnr"><color name="black">indtast modelnr </color><color name="red">*</color></string>
+    <string name="available_wifi">Tilgængelig wifi</string>
+    <string name="textinfo">Du har 15 sekunder til at indtaste kodeord og tilslut wifi.</string>
+    <string name="uroapp">UroApp</string>
+    <string name="logout">Logout</string>
+    <string name="start">Start</string>
+    <string name="on">Tænd</string>
+    <string name="light">light</string>
+    <string name="v_lg_musik">Vælg musik:</string>
+</resources>

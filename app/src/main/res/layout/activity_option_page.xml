@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="40dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:background="@drawable/backgrounduro2022"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/uro_orange"
+        android:text="@string/on"
+        android:layout_marginTop="280dp"
+        android:layout_marginStart="200dp"/>
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/uro_orange"
+        android:text="@string/start"
+        android:layout_marginTop="370dp"
+        android:layout_marginStart="200dp"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="117dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="650dp"
+        android:backgroundTint="@color/uro_orange"
+        android:text="@string/logout" />
+
+    <ImageView
+        android:id="@+id/imageLight"
+        android:layout_width="85dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="260dp"
+        app:srcCompat="@drawable/light_icon"
+        android:contentDescription="@string/light" />
+
+    <ImageView
+        android:id="@+id/imageMusic"
+        android:layout_width="60dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="365dp"
+        app:srcCompat="@drawable/music_icon"
+        android:contentDescription="@string/light" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="440dp"
+        android:text="@string/v_lg_musik"
+        android:layout_marginBottom="55dp"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="430dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+</RelativeLayout>

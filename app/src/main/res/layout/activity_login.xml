@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="90dp"
+    android:paddingStart="25dp"
+    android:paddingEnd="20dp"
+    android:background="@drawable/backgrounduro2022"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/required"
+        android:layout_width="382dp"
+        android:layout_height="179dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginStart="100dp"
+        android:paddingBottom="25dp"
+        android:text="@string/indtast_modelnr"
+        android:textSize="12sp"/>
+
+    <EditText
+        android:id="@+id/enterModelNum"
+        android:layout_width="191dp"
+        android:layout_height="49dp"
+        android:autofillHints=""
+        android:inputType="text"
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="100dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:ignore="LabelFor"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/uro_orange"
+        android:text="@string/login"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="200dp"/>
+
+</RelativeLayout>

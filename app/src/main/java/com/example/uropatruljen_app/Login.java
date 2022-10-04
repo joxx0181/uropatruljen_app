@@ -174,7 +174,8 @@ public class Login extends AppCompatActivity {
                     // Using expression lambda to display Toast message in a thread
                     Login.this.runOnUiThread(() -> Toast.makeText(getBaseContext(),"Besked fra uro: " + token, Toast.LENGTH_SHORT).show());
 
-                   /* if (data > 0) {
+                    if (data > 0 && !token.isEmpty()) {
+
                         // Intent function to move to another activity
                         Intent goToHotspot = new Intent(getApplicationContext(), Hotspot.class);
 
@@ -183,7 +184,7 @@ public class Login extends AppCompatActivity {
                         goToHotspot.putExtra("pass_key", getPASS);
                         startActivity(goToHotspot);
                         finish();
-                    } */
+                    }
 
             } catch (Exception e) {
                 e.printStackTrace();

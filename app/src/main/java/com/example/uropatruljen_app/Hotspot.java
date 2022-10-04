@@ -29,8 +29,8 @@ import java.util.List;
 public class Hotspot extends ListActivity {
 
     // Initializing
-    private final String hoturoSSID = "prog";
-    private final String hoturoPASS = "Alvorlig5And";
+    private final String hoturoSSID = "hoturo";
+    private final String hoturoPASS = "Kode1234!";
     WifiManager wifiOBJ;
     WifiScanReceiver wifiReceiver;
     ListView list;
@@ -62,23 +62,25 @@ public class Hotspot extends ListActivity {
         wifiReceiver = new WifiScanReceiver();
         wifiOBJ.startScan();
 
-        if(!currentSSID.contains("prog")) {
+        if(!currentSSID.contains("hoturo")) {
 
-                finallyConnect(hoturoPASS, hoturoSSID);
+            // Disable wifi
+            wifiOBJ.setWifiEnabled(true);
 
-                // listening to a list with all avaiable wifi using an on click function
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            finallyConnect(hoturoPASS, hoturoSSID);
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // listening to a list with all avaiable wifi using an on click function
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                        // SSID of selected wifi from list of all avaiable wifi
-                        String ssid = ((TextView) view).getText().toString();
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        GetPersonalWifi(ssid);
-                    }
-                });
+                    // SSID of selected wifi from list of all avaiable wifi
+                    String ssid = ((TextView) view).getText().toString();
 
+                    getPersonalWifi(ssid);
+                }
+            });
         }
         else {
 
@@ -89,19 +91,27 @@ public class Hotspot extends ListActivity {
             String personalSSID = receivedKeys.getStringExtra("ssid_key");
             String personalPASS = receivedKeys.getStringExtra("pass_key");
 
-            finallyConnect(personalPASS, personalSSID);
 
-            if (currentSSID.contains(personalSSID)) {
+            if (!personalSSID.isEmpty() && !personalPASS.isEmpty()) {
 
-                Intent goToOption = new Intent(Hotspot.this, OptionPage.class);
-                startActivity(goToOption);
+                do {
+                    finallyConnect(personalPASS, personalSSID);
+
+                } while (!currentSSID.contains(personalSSID));
+
+                    // Intent function to move to another activity
+                    Intent goToOption = new Intent(Hotspot.this, OptionPage.class);
+                    startActivity(goToOption);
             }
             else {
 
+                // Disable wifi
+                wifiOBJ.setWifiEnabled(false);
+
+                // Intent function to move to another activity
                 Intent goToStart = new Intent(Hotspot.this, MainActivity.class);
                 startActivity(goToStart);
             }
-
         }
     }
 
@@ -159,7 +169,7 @@ public class Hotspot extends ListActivity {
         wifiOBJ.addNetwork(conf);
     }
 
-    private void GetPersonalWifi(final String pSSID) {
+    private void getPersonalWifi(final String pSSID) {
 
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.connect);

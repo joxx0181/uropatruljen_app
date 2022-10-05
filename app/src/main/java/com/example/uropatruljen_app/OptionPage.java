@@ -74,12 +74,10 @@ public class OptionPage extends AppCompatActivity implements AdapterView.OnItemS
 
             if (compoundButton.isChecked()) {
 
-                // on send with protobuf to iot is missing!!!!!
                 lightOnOff.setImageResource(R.drawable.light_icon2);
             }
             else {
 
-                // off send with protobuf to iot is missing!!!!!
                 lightOnOff.setImageResource(R.drawable.light_icon);
             }
         });
@@ -144,9 +142,6 @@ public class OptionPage extends AppCompatActivity implements AdapterView.OnItemS
 
             // Display selected spinner item
             Toast.makeText(parent.getContext(), "Der er valgt: " + item, Toast.LENGTH_LONG).show();
-
-            // send with protobuf to iot is missing!!!!!
-
         }
         else if (item.contains("edderkop")) {
 
@@ -156,9 +151,6 @@ public class OptionPage extends AppCompatActivity implements AdapterView.OnItemS
 
             // Display selected spinner item
             Toast.makeText(parent.getContext(), "Der er valgt: " + item, Toast.LENGTH_LONG).show();
-
-            // send with protobuf to iot is missing!!!!!
-
         }
         else if (item.contains("bussen")) {
 
@@ -168,14 +160,10 @@ public class OptionPage extends AppCompatActivity implements AdapterView.OnItemS
 
             // Display selected spinner item
             Toast.makeText(parent.getContext(), "Der er valgt: " + item, Toast.LENGTH_LONG).show();
-
-            // send with protobuf to iot is missing!!!!!
-
         }
         else {
 
             Toast.makeText(parent.getContext(), "Der er ikke valgt musik", Toast.LENGTH_LONG).show();
-
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {

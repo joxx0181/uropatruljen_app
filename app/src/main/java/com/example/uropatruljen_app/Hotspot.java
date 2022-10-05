@@ -92,7 +92,7 @@ public class Hotspot extends ListActivity {
             String personalPASS = receivedKeys.getStringExtra("pass_key");
 
 
-            if (!personalSSID.isEmpty() && !personalPASS.isEmpty()) {
+            if (!personalSSID.isEmpty() || !personalPASS.isEmpty()) {
 
                 do {
                     finallyConnect(personalPASS, personalSSID);
@@ -153,16 +153,19 @@ public class Hotspot extends ListActivity {
     }
 
     private void finallyConnect(String networkPass, String networkSSID) {
+
+        // Setup wifi configuration
         WifiConfiguration wifiConfig = new WifiConfiguration();
         wifiConfig.SSID = String.format("\"%s\"", networkSSID);
         wifiConfig.preSharedKey = String.format("\"%s\"", networkPass);
 
-        // remember id
+        // Remember id
         int netId = wifiOBJ.addNetwork(wifiConfig);
         wifiOBJ.disconnect();
         wifiOBJ.enableNetwork(netId, true);
         wifiOBJ.reconnect();
 
+        // Connecting device with given SSID and password
         WifiConfiguration conf = new WifiConfiguration();
         conf.SSID = "\"\"" + networkSSID + "\"\"";
         conf.preSharedKey = "\"" + networkPass + "\"";

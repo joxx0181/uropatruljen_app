@@ -11,4 +11,12 @@
     <string name="on">Tænd</string>
     <string name="light">light</string>
     <string name="v_lg_musik">Vælg musik:</string>
+    <string name="stopMusic">Stop</string>
+    <string name="startMusic">Start</string>
+    <string name="_00_00">00:00</string>
+    <string name="time345">3:45</string>
+    <string name="time152">1:52</string>
+    <string name="toggleBTN" />
+    <string name="lightON">Tænd</string>
+    <string name="lightOFF">Sluk</string>
 </resources>

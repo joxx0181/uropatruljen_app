@@ -4,20 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="40dp"
     android:paddingLeft="25dp"
     android:paddingRight="25dp"
     android:background="@drawable/backgrounduro2022"
     tools:context=".MainActivity">
 
-    <Button
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/uro_orange"
-        android:text="@string/on"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="280dp"
-        android:layout_marginStart="200dp"/>
+        android:backgroundTint="@color/uro_orange"
+        android:text="@string/toggleBTN"
+        android:textColor="@color/white"
+        android:textOff="@string/lightON"
+        android:textOn="@string/lightOFF"
+        android:textSize="30sp"
+        android:thumb="@drawable/selector"
+        app:showText="true"
+        app:track="@drawable/switch_track" />
 
     <Button
         android:id="@+id/music"
@@ -31,9 +38,9 @@
     <Button
         android:id="@+id/logout"
         android:layout_width="117dp"
-        android:layout_height="66dp"
+        android:layout_height="58dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="640dp"
         android:backgroundTint="@color/uro_orange"
         android:text="@string/logout" />
 
@@ -43,8 +50,8 @@
         android:layout_height="79dp"
         android:layout_marginStart="125dp"
         android:layout_marginTop="260dp"
-        app:srcCompat="@drawable/light_icon"
-        android:contentDescription="@string/light" />
+        android:contentDescription="@string/light"
+        app:srcCompat="@drawable/light_icon" />
 
     <ImageView
         android:id="@+id/imageMusic"
@@ -55,19 +62,23 @@
         app:srcCompat="@drawable/music_icon"
         android:contentDescription="@string/light" />
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="440dp"
-        android:text="@string/v_lg_musik"
-        android:layout_marginBottom="55dp"/>
-
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="100dp"
+        android:layout_width="160dp"
         android:layout_height="48dp"
-        android:layout_marginStart="200dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="430dp"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="375dp"
+        android:text="@string/_00_00"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 </RelativeLayout>

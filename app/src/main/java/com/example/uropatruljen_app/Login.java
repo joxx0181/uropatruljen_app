@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     Button loginBTN;
     Thread Thread = null;
     Socket socket;
-    String serverIP = "10.108.137.80";
+    String serverIP = "192.168.4.1";
     int serverPORT = 1883;
 
     @Override
@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
         Thread = new Thread(new SocketThread());
         Thread.start();
 
-        // Perform click event using lambda on loginBTN
+        // Perform click event using lambda on loginBTN ( login function )
         loginBTN.setOnClickListener(view -> {
 
             // Getting modelNum from entered input

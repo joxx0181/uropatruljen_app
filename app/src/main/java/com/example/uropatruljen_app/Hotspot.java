@@ -64,7 +64,7 @@ public class Hotspot extends ListActivity {
 
         if(!currentSSID.contains("hoturo")) {
 
-            // Disable wifi
+            // Enable wifi
             wifiOBJ.setWifiEnabled(true);
 
             finallyConnect(hoturoPASS, hoturoSSID);
